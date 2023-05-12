@@ -1,13 +1,13 @@
 from flask import Flask, request 
 import pandas as pd 
 
-df = pd.read_csv('./data/Services2019Mn.csv')
+df = pd.read_csv('./data/provider012622.csv')
 
 app = Flask(__name__)
 
 @app.route('/', methods=["GET"])
 def home():
-    return 'this is a API service for MN Services'
+    return 'this is a API service for MN ICD code details'
 
 @app.route('/preview', methods=["GET"])
 def preview():
@@ -18,7 +18,7 @@ def preview():
 @app.route('/icd/<value>', methods=['GET'])
 def icdcode(value):
     print('value: ', value)
-    filtered = df[df['age_group_code'] == value]
+    filtered = df[df['principal_diagnosis_code'] == value]
     if len(filtered) <= 0:
         return 'There is nothing here'
     else: 
